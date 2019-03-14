@@ -1,5 +1,6 @@
 package com.iteso.test;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment; //duda con este import, me daba error sin el support.v4.app
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
@@ -12,17 +13,21 @@ import android.view.ViewGroup;
 import com.iteso.test.beans.ItemProduct;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class FragmentTechnology extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    ArrayList<ItemProduct> myDataSet;
+    RecyclerView recyclerView;
+
     public FragmentTechnology() {
 
     }
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_technology, container, false);
-        RecyclerView recyclerView = (RecyclerView)
+        recyclerView = (RecyclerView)
                 view.findViewById(R.id.fragment_technology_recycler_view);
         // Use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -32,7 +37,7 @@ public class FragmentTechnology extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
 
-    ArrayList<ItemProduct> myDataSet = new ArrayList<ItemProduct>();
+    myDataSet = new ArrayList<ItemProduct>();
     ItemProduct itemProduct = new ItemProduct();
      itemProduct.setTitle("MacBook Pro 17\"");
      itemProduct.setStore("BestBuy");
@@ -57,4 +62,24 @@ public class FragmentTechnology extends Fragment {
     recyclerView.setAdapter(mAdapter);
     return view;
     }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ItemProduct itemProduct = data.getParcelableExtra("ITEM");
+        Iterator<ItemProduct> iterator = myDataSet.iterator();
+        int position = 0;
+        while(iterator.hasNext()){
+            ItemProduct item = iterator.next();
+            if(item.getCode() == itemProduct.getCode()){
+                myDataSet.set(position, itemProduct);
+                break;
+            }
+            position++;
+        }
+        mAdapter.notifyDataSetChanged();
+    }
+
+
 }

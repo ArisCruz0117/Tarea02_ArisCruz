@@ -1,5 +1,7 @@
 package com.iteso.test;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -37,6 +39,10 @@ public class ActivityMain extends AppCompatActivity {
      */
     private ViewPager mViewPager;
 
+    private FragmentTechnology fragmentTechnology;
+    private FragmentHome fragmentHome;
+    private FragmentElectronics fragmentElectronics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,16 +60,6 @@ public class ActivityMain extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
-
-
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
 
     }
 
@@ -140,11 +136,19 @@ public class ActivityMain extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragmentTechnology();
+                    if(fragmentTechnology == null){
+                        fragmentTechnology = new FragmentTechnology();
+                    }
+                    return fragmentTechnology;
                 case 1:
+                    if(fragmentHome == null){
+                        fragmentHome = new FragmentHome();
+                    }
                     return new FragmentHome();
                 case 2:
-                    return new FragmentElectronics();
+                    if (fragmentElectronics == null)
+                        fragmentElectronics = new FragmentElectronics();
+                    return fragmentElectronics;
                 default:
                     return new FragmentTechnology();
             }
@@ -164,6 +168,15 @@ public class ActivityMain extends AppCompatActivity {
                 case 2: return  getString(R.string.title_section3).toUpperCase();
             }
             return null;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == 1){
+            if(resultCode == Activity.RESULT_OK){
+                fragmentTechnology.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 }

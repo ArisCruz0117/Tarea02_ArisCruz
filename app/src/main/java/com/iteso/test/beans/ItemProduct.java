@@ -1,12 +1,16 @@
 package com.iteso.test.beans;
 
-public class ItemProduct {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ItemProduct implements Parcelable{
     private int image;
     private String title;
     private String store;
     private String location;
     private String phone;
     private String description;
+    private int code;
 
     public ItemProduct() {
         setImage(0);
@@ -29,14 +33,54 @@ public class ItemProduct {
                 '}';
     }
 
-    public ItemProduct(int image, String title, String store, String location, String phone, String description) {
+    public ItemProduct(int image, String title, String store, String location, String phone, String description, int code) {
         setImage(image);
         setTitle(title);
         setStore(store);
         setLocation(location);
         setPhone(phone);
         setDescription(description);
+        setCode(code);
     }
+
+    public ItemProduct(Parcel in){
+        image = in.readInt();
+        title = in.readString();
+        store = in.readString();
+        location = in.readString();
+        phone = in.readString();
+        description = in.readString();
+        code = in.readInt();
+
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(image);
+        dest.writeString(title);
+        dest.writeString(store);
+        dest.writeString(location);
+        dest.writeString(phone);
+        dest.writeString(description);
+        dest.writeInt(code);
+    }
+    public static final Parcelable.Creator<ItemProduct> CREATOR = new
+            Parcelable.Creator<ItemProduct>() {
+                @Override
+                public ItemProduct createFromParcel(Parcel source) {
+                    // using parcelable constructor
+                    return new ItemProduct (source);
+                }
+                @Override
+                public ItemProduct [] newArray(int size) {
+                    return new ItemProduct [size];
+                }
+            };
 
     public String getName() {
         return title;
@@ -92,5 +136,13 @@ public class ItemProduct {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

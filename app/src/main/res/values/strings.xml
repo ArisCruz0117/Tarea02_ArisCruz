@@ -13,5 +13,13 @@
     <string name="item_product_store">Best Buy</string>
     <string name="item_product_location">Guadalajara, Jalisco</string>
     <string name="item_product_phone">35407199</string>
+    <string name="activity_detail_save">Save</string>
+    <string name="activity_detail_cancel">Cancel</string>
+    <string name="activity_detail_title_hint">Introduce title...</string>
+    <string name="activity_detail_store_hint">Ingrese store...</string>
+    <string name="activity_detail_location_hint">Ingrese location...</string>
+    <string name="activity_detail_phone_hint">Introduce phone...</string>
+
+
 
 </resources>

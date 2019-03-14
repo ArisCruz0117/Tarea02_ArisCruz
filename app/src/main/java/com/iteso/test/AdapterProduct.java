@@ -103,6 +103,16 @@ public class AdapterProduct extends RecyclerView.Adapter<AdapterProduct.ViewHold
             }
         });
 
+        holder.mEventLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ItemProduct itemProduct = mDataSet.get(position);
+                Intent intent = new Intent(context,ActivityDetail.class);
+                intent.putExtra("ITEM", itemProduct);
+                ((ActivityMain) context).startActivityForResult(intent, 1);
+            }
+        });
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
