@@ -8,6 +8,8 @@
     <string name="fragment_home_text">Home stuff goes here!</string>
     <string name="fragment_electronics_text">Electronics stuff goes here!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logOut">LogOut</string>
+    <string name="action_privacyPolicy">PrivacyPolicy</string>
     <string name="item_product_share">SHARE</string>
     <string name="item_product_seeMore">SEE MORE</string>
     <string name="item_product_store">Best Buy</string>
@@ -19,7 +21,7 @@
     <string name="activity_detail_store_hint">Ingrese store...</string>
     <string name="activity_detail_location_hint">Ingrese location...</string>
     <string name="activity_detail_phone_hint">Introduce phone...</string>
-
+    <string name="activity_splash_welcome">WELCOME TO ITESO PRODUCTS</string>
 
 
 </resources>
