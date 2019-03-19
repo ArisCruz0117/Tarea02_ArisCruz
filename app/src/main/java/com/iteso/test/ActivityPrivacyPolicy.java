@@ -11,6 +11,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.iteso.test.tools.WebAppInterface;
+
 public class ActivityPrivacyPolicy extends AppCompatActivity implements DialogInterface.OnKeyListener{
 
     WebView mWebView;
@@ -48,19 +50,5 @@ public class ActivityPrivacyPolicy extends AppCompatActivity implements DialogIn
 // system behavior (probably exit the activity)
         return super.onKeyDown(keyCode, event);
     }
-
-
-    public class WebAppInterface {
-        Context mContext;
-        WebAppInterface(Context c) {
-            mContext = c;
-        }
-        /** Show a toast from the web page */
-        @JavascriptInterface
-        public void showToast(String toast) {
-            Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
-        }
-    }
-
 
 }
